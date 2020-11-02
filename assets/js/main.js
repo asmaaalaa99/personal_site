@@ -72,8 +72,8 @@
 	// Sidebar.
 		var $sidebar = $('#sidebar'),
 			$sidebar_inner = $sidebar.children('.inner');
-
 		// Inactive by default on <= large.
+	
 			breakpoints.on('<=large', function() {
 				$sidebar.addClass('inactive');
 			});
@@ -81,7 +81,6 @@
 			breakpoints.on('>large', function() {
 				$sidebar.removeClass('inactive');
 			});
-
 		// Hack: Workaround for Chrome/Android scrollbar position bug.
 			if (browser.os == 'android'
 			&&	browser.name == 'chrome')
@@ -92,13 +91,7 @@
 			$('<a href="#sidebar" class="toggle">Toggle</a>')
 				.appendTo($sidebar)
 				.on('click', function(event) {
-
-					// Prevent default.
-						event.preventDefault();
-						event.stopPropagation();
-
-					// Toggle.
-						$sidebar.toggleClass('inactive');
+					$sidebar.removeClass('inactive');
 
 				});
 
@@ -162,7 +155,16 @@
 						$sidebar.addClass('inactive');
 
 				});
+				$body.on('click touchend', function(event) {
 
+					// >large? Bail.
+						if (breakpoints.active('>large'))
+							return;
+
+					// Deactivate.
+						$sidebar.addClass('inactive');
+
+				});
 		// Scroll lock.
 		// Note: If you do anything to change the height of the sidebar's content, be sure to
 		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
@@ -260,3 +262,18 @@
 			});
 
 })(jQuery);
+var mini = true;
+
+function toggleSidebar() {
+  if (mini) {
+    console.log("opening sidebar");
+    document.getElementById("sidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    this.mini = false;
+  } else {
+    console.log("closing sidebar");
+    document.getElementById("mySidebar").style.width = "85px";
+    document.getElementById("main").style.marginLeft = "85px";
+    this.mini = true;
+  }
+}

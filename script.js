@@ -50,7 +50,76 @@ var TxtRotate = function(el, toRotate, period) {
     }
     // INJECT CSS
     var css = document.createElement("style");
-    css.nodeType = "style.css";
+    css.nodeType = "main.css";
     css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
     document.body.appendChild(css);
   };
+
+
+var mini = true;
+
+function toggleSidebar() {
+  if (mini) {
+    console.log("opening sidebar");
+    document.getElementById("sidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    this.mini = false;
+  } else {
+    console.log("closing sidebar");
+    document.getElementById("mySidebar").style.width = "85px";
+    document.getElementById("main").style.marginLeft = "85px";
+    this.mini = true;
+  }
+};
+$(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+  	if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+  		$('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+  	}
+
+  	sr.reveal('.js--fadeInRight', {
+	    origin: 'right',
+	    distance: '300px',
+	    easing: 'ease-in-out',
+	    duration: 800,
+	  });
+
+  } else {
+  	
+  	sr.reveal('.js--fadeInLeft', {
+	    origin: 'left',
+	    distance: '300px',
+		  easing: 'ease-in-out',
+	    duration: 800,
+	  });
+
+	  sr.reveal('.js--fadeInRight', {
+	    origin: 'right',
+	    distance: '300px',
+	    easing: 'ease-in-out',
+	    duration: 800,
+	  });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+	    origin: 'left',
+	    distance: '300px',
+		  easing: 'ease-in-out',
+	    duration: 800,
+	  });
+
+	  sr.reveal('.js--fadeInRight', {
+	    origin: 'right',
+	    distance: '300px',
+	    easing: 'ease-in-out',
+	    duration: 800,
+	  });
+
+
+});
+
